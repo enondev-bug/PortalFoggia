@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 import { supabase } from '../lib/supabase';
 
-export interface SystemSettings {
+interface SystemSettings {
   siteName: string;
   siteDescription: string;
   maintenanceMode: boolean;

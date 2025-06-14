@@ -20,11 +20,11 @@ export const mockBusinessStats: BusinessStats = {
   monthlyGrowth: 0
 };
 
-export const mockAdminBusinesses: AdminBusiness[] = [];
+const mockAdminBusinesses: AdminBusiness[] = [];
 
-export const mockAdminReviews: AdminReview[] = [];
+const mockAdminReviews: AdminReview[] = [];
 
-export const mockSystemSettings: SystemSettings = {
+const mockSystemSettings: SystemSettings = {
   siteName: 'Business Hub',
   siteDescription: 'La piattaforma completa per scoprire le migliori attività locali',
   maintenanceMode: false,

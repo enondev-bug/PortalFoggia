@@ -15,8 +15,6 @@
     "react-dom": "^18.3.1",
     "framer-motion": "^10.16.16",
     "@supabase/supabase-js": "^2.39.0",
-    "leaflet": "^1.9.4",
-    "react-leaflet": "^4.2.1",
     "zustand": "^4.5.0"
   },
   "devDependencies": {

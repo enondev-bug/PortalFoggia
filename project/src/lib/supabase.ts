@@ -18,7 +18,7 @@ export const supabase = createClient<Database>(supabaseUrl, supabaseAnonKey, {
 });
 
 // Helper functions for common operations OTTIMIZZATE
-export const getCurrentUser = async () => {
+const getCurrentUser = async () => {
   try {
     const { data: { user }, error } = await supabase.auth.getUser();
     if (error) {
@@ -156,7 +156,7 @@ export const updateUserProfile = async (updates: Partial<Database['public']['Tab
   }
 };
 
-export const signUp = async (email: string, password: string, name: string) => {
+const signUp = async (email: string, password: string, name: string) => {
   try {
     console.log('📝 Signing up user:', email);
     const { data, error } = await supabase.auth.signUp({
@@ -182,7 +182,7 @@ export const signUp = async (email: string, password: string, name: string) => {
   }
 };
 
-export const signIn = async (email: string, password: string) => {
+const signIn = async (email: string, password: string) => {
   try {
     console.log('🔐 Signing in user:', email);
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -203,7 +203,7 @@ export const signIn = async (email: string, password: string) => {
   }
 };
 
-export const signOut = async () => {
+const signOut = async () => {
   try {
     console.log('🚪 Signing out user...');
     const { error } = await supabase.auth.signOut();
@@ -230,7 +230,7 @@ export const debugUserLogin = async (email: string) => {
   }
 };
 
-export const createAdminUser = async (email: string, name?: string) => {
+const createAdminUser = async (email: string, name?: string) => {
   try {
     const { data, error } = await supabase.rpc('create_admin_user', { 
       admin_email: email,
@@ -245,7 +245,7 @@ export const createAdminUser = async (email: string, name?: string) => {
 };
 
 // Business operations
-export const getBusinesses = async (filters?: {
+const getBusinesses = async (filters?: {
   category?: string;
   search?: string;
   status?: string;
@@ -285,7 +285,7 @@ export const getBusinesses = async (filters?: {
   return data;
 };
 
-export const getBusiness = async (id: string) => {
+const getBusiness = async (id: string) => {
   const { data, error } = await supabase
     .from('businesses')
     .select(`
@@ -304,7 +304,7 @@ export const getBusiness = async (id: string) => {
   return data;
 };
 
-export const getCategories = async () => {
+const getCategories = async () => {
   const { data, error } = await supabase
     .from('categories')
     .select('*')
@@ -315,7 +315,7 @@ export const getCategories = async () => {
 };
 
 // Reviews operations
-export const createReview = async (review: {
+const createReview = async (review: {
   business_id: string;
   rating: number;
   title?: string;
@@ -337,7 +337,7 @@ export const createReview = async (review: {
   return data;
 };
 
-export const getReviews = async (businessId: string) => {
+const getReviews = async (businessId: string) => {
   const { data, error } = await supabase
     .from('reviews')
     .select(`
@@ -353,7 +353,7 @@ export const getReviews = async (businessId: string) => {
 };
 
 // Favorites operations
-export const toggleFavorite = async (businessId: string) => {
+const toggleFavorite = async (businessId: string) => {
   const user = await getCurrentUser();
   if (!user) throw new Error('User not authenticated');
 
@@ -388,7 +388,7 @@ export const toggleFavorite = async (businessId: string) => {
   }
 };
 
-export const getUserFavorites = async () => {
+const getUserFavorites = async () => {
   const user = await getCurrentUser();
   if (!user) return [];
 
@@ -405,7 +405,7 @@ export const getUserFavorites = async () => {
 };
 
 // Contact requests
-export const createContactRequest = async (request: {
+const createContactRequest = async (request: {
   business_id: string;
   type: 'info' | 'booking' | 'quote' | 'complaint';
   subject?: string;
@@ -429,7 +429,7 @@ export const createContactRequest = async (request: {
 };
 
 // Admin operations
-export const getAdminStats = async () => {
+const getAdminStats = async () => {
   const [
     { count: totalBusinesses },
     { count: activeBusinesses },
@@ -453,7 +453,7 @@ export const getAdminStats = async () => {
   };
 };
 
-export const updateBusinessStatus = async (businessId: string, status: string) => {
+const updateBusinessStatus = async (businessId: string, status: string) => {
   const { data, error } = await supabase
     .from('businesses')
     .update({ status })
@@ -465,7 +465,7 @@ export const updateBusinessStatus = async (businessId: string, status: string) =
   return data;
 };
 
-export const updateReviewStatus = async (reviewId: string, status: string) => {
+const updateReviewStatus = async (reviewId: string, status: string) => {
   const { data, error } = await supabase
     .from('reviews')
     .update({ status })
@@ -478,7 +478,7 @@ export const updateReviewStatus = async (reviewId: string, status: string) => {
 };
 
 // Business creation for admin
-export const createBusiness = async (businessData: {
+const createBusiness = async (businessData: {
   name: string;
   slug: string;
   description?: string;
@@ -511,7 +511,7 @@ export const createBusiness = async (businessData: {
 };
 
 // Profile creation for business owners
-export const createBusinessOwnerProfile = async (profileData: {
+const createBusinessOwnerProfile = async (profileData: {
   email: string;
   name: string;
   phone?: string;

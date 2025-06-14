@@ -1,7 +1,7 @@
 // Sistema Analytics Completo per Business Hub
 import { supabase } from './supabase';
 
-export interface AnalyticsEvent {
+interface AnalyticsEvent {
   id?: string;
   event_type: string;
   event_category: 'user' | 'business' | 'search' | 'interaction' | 'system';
@@ -16,7 +16,7 @@ export interface AnalyticsEvent {
   created_at?: string;
 }
 
-export interface AnalyticsMetrics {
+interface AnalyticsMetrics {
   visitors: {
     total: number;
     unique: number;

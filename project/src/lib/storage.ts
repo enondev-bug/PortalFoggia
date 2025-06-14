@@ -1,6 +1,6 @@
 import { supabase } from './supabase';
 
-export interface UploadResult {
+interface UploadResult {
   url: string;
   path: string;
   error?: string;
@@ -70,7 +70,7 @@ export const uploadAvatar = async (file: File): Promise<UploadResult> => {
 /**
  * Elimina un avatar dal storage
  */
-export const deleteAvatar = async (path: string): Promise<boolean> => {
+const deleteAvatar = async (path: string): Promise<boolean> => {
   try {
     // Se è un URL completo, estrai il path
     if (path.includes('/storage/v1/object/public/')) {
@@ -185,7 +185,7 @@ export const deleteBusinessImage = async (path: string): Promise<boolean> => {
 /**
  * Ottieni URL pubblico per un file
  */
-export const getPublicUrl = (bucket: string, path: string): string => {
+const getPublicUrl = (bucket: string, path: string): string => {
   const { data } = supabase.storage
     .from(bucket)
     .getPublicUrl(path);
@@ -196,7 +196,7 @@ export const getPublicUrl = (bucket: string, path: string): string => {
 /**
  * Lista file in un bucket
  */
-export const listFiles = async (bucket: string, folder?: string) => {
+const listFiles = async (bucket: string, folder?: string) => {
   try {
     const { data, error } = await supabase.storage
       .from(bucket)
